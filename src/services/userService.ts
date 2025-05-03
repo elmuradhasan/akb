@@ -12,6 +12,6 @@ export const getUserByUsername = async (username: string) => {
   return response.data;
 };
 export const getUserRepos = async (username: string) => {
-  const response = await axios.get(`https://api.github.com/users/${username}/repos`);
+  const response = await axios.get(`https://api.github.com/users/${username}/repos?per_page=100`);
   return response.data;
 };

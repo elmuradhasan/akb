@@ -16,6 +16,8 @@ import { getUserByUsername } from "@services/userService";
 import { useUserStore } from "../../store/userStore";
 import { schema } from "../../schema/userValidationSchema";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
+
 
 const UserSearchForm = () => {
   const setUser = useUserStore((state) => state.setUser);
@@ -23,22 +25,22 @@ const UserSearchForm = () => {
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
-
   const { mutate, isPending } = useMutation({
     mutationFn: getUserByUsername,
     onSuccess: (data) => {
       setUser(data);
       navigate("/detail");
-      console.log("User fetched:", data);
     },
     onError: (error) => {
-      navigate("/detail");
+      toast.error("İstifadəçi tapılmadı. Zəhmət olmasa düzgün username daxil edin.");
       console.error("User not found:", error);
-    },
+    }
+    
   });
 
   const onSubmit = (data: any) => {

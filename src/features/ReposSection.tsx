@@ -6,6 +6,7 @@ import {
   Badge,
   ButtonGroup,
   IconButton,
+  SimpleGrid,
 } from "@chakra-ui/react";
 import { useUserRepos, useUserStore } from "../store/userStore";
 import { useState } from "react";
@@ -34,7 +35,14 @@ const ReposSection = () => {
         İctimai Repositilər
       </Heading>
 
-      <Stack gap={4} bg="white" p={4} borderRadius="md" boxShadow="sm">
+      <SimpleGrid
+        columns={{ base: 1, md: 3 }}
+        gap={4}
+        bg="white"
+        p={4}
+        borderRadius="md"
+        boxShadow="sm"
+      >
         {visibleRepos.map((repo) => (
           <Box
             key={repo.id}
@@ -57,10 +65,10 @@ const ReposSection = () => {
               </a>
             </Heading>
             <Text mb={2}>{repo.description || "Açıqlama yoxdur"}</Text>
-            <Badge colorScheme="yellow">★ {repo.stargazers_count}</Badge>
+            <Badge bg="red.100" colorScheme="yellow">★ {repo.stargazers_count}</Badge>
           </Box>
         ))}
-      </Stack>
+      </SimpleGrid>
 
       <Pagination.Root
         count={repos.length}
@@ -71,9 +79,9 @@ const ReposSection = () => {
         <ButtonGroup
           mt={6}
           size="sm"
-          flexWrap="wrap" 
-          justifyContent="center" 
-          gap={2} 
+          flexWrap="wrap"
+          justifyContent="center"
+          gap={2}
         >
           <Pagination.PrevTrigger asChild>
             <IconButton>

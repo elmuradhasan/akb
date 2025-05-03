@@ -18,6 +18,8 @@ import ReposSection from "@features/ReposSection";
 
 const DetailPage = () => {
   const user = useUserStore((state) => state.user);
+  console.log(user,"vayy");
+  
   const navigate = useNavigate();
 
   if (!user) {
@@ -125,7 +127,7 @@ const DetailPage = () => {
         borderRadius="lg"
         boxShadow="md"
         bg="blue.100"
-        height={["auto", "auto", 700]}
+        height={["auto", "auto", "auto"]}
       >
         <ReposSection />
       </Box>
