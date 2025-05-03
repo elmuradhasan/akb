@@ -22,7 +22,8 @@
       "@pages/*": ["pages/*"],
       "@features/*": ["features/*"],
       "@services/*": ["services/*"],
-      "@types/*": ["types/*"]
+      "@types/*": ["types/*"],
+      "@store/*": ["store/*"]
     }
   },
   "include": ["src"]
