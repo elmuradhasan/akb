@@ -9,6 +9,8 @@ import {
   InputGroup,
   HStack,
   Heading,
+  Box,
+  Flex,
 } from "@chakra-ui/react";
 import { LuUser } from "react-icons/lu";
 import { useMutation } from "@tanstack/react-query";
@@ -31,7 +33,7 @@ const UserSearchForm = () => {
   const { mutate, isPending } = useMutation({
     mutationFn: getUserByUsername,
     onSuccess: (data) => {
-      setUser(data); // Zustand store-a yazırıq
+      setUser(data);
       navigate("/detail");
       console.log("User fetched:", data);
     },
@@ -46,20 +48,28 @@ const UserSearchForm = () => {
   };
 
   return (
-    <HStack
-      display="flex"
-      justifyContent="space"
-      alignItems="center"
-      padding={20}
-      flexDirection="column"
-      borderRadius={8}
+    <Box
+      width={{ base: "100%", sm: "80%", md: "60%", lg: "50%" }}
+      padding={{ base: 6, md: 10 }}
+      borderRadius="md"
       boxShadow="lg"
       bg="blue.100"
-      width={"50%"}
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      mt={10}
     >
-      <Heading color="teal.solid" marginBottom={4} fontSize={24}>Github istifadəçisi axtarışı</Heading>
-      <form onSubmit={handleSubmit(onSubmit)} style={{ width: "100%" }}>
-        <Stack gap={4} maxW="400px" mx="auto">
+      <Heading
+        color="teal.600"
+        mb={6}
+        fontSize={{ base: "lg", md: "2xl" }}
+        textAlign="center"
+      >
+        Github istifadəçisi axtarışı
+      </Heading>
+      <form onSubmit={handleSubmit(onSubmit)} style={{width:"300px"}} >
+        <Stack gap={4} >
           <Controller
             name="username"
             control={control}
@@ -68,18 +78,30 @@ const UserSearchForm = () => {
               <Field.Root invalid={!!errors.username}>
                 <Field.Label>İstifadəçi adı:</Field.Label>
                 <InputGroup startElement={<LuUser />}>
-                  <Input {...field} placeholder="İstifadəçi adı" outline="none" border="1px solid gray" margin="10px 0px"/>
+                  <Input
+                    {...field}
+                    placeholder="İstifadəçi adı"
+                    border="1px solid gray"
+                    margin="10px 0"
+                  />
                 </InputGroup>
-                <Field.ErrorText>{errors.username?.message}</Field.ErrorText>
+                <Field.ErrorText>
+                  {errors.username?.message}
+                </Field.ErrorText>
               </Field.Root>
             )}
           />
-          <Button type="submit" colorScheme="blue" w="full" loading={isPending}>
+          <Button
+            type="submit"
+            colorScheme="blue"
+            w="full"
+            isLoading={isPending}
+          >
             Axtar
           </Button>
         </Stack>
       </form>
-    </HStack>
+    </Box>
   );
 };
 

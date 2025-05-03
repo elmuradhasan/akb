@@ -19,8 +19,8 @@ const ReposSection = () => {
   const { data: repos, isLoading, isError } = useUserRepos(user?.login);
   const [page, setPage] = useState(1);
 
-  if (isLoading) return <Text>Loading...</Text>;
-  if (isError) return <Text>Repolar yüklənə bilmədi.</Text>;
+  if (isLoading) return <Text>Repolar yüklənir...</Text>;
+  if (isError) return <Text textAlign="center">Repolar yüklənə bilmədi.</Text>;
   if (!repos || repos.length === 0)
     return <Text>İstifadəçinin public reposu yoxdur.</Text>;
 
@@ -29,21 +29,12 @@ const ReposSection = () => {
   const visibleRepos = repos.slice(startIndex, endIndex);
 
   return (
-    <Box
-      mt={10}
-      width={{ base: "90%", sm: "80%", md: "70%", lg: "60%" }}
-      mx="auto"
-      p={6}
-      borderWidth="1px"
-      borderRadius="lg"
-      boxShadow="md"
-      bg="blue.100"
-    >
+    <Box>
       <Heading size="md" mb={4}>
         İctimai Repositilər
       </Heading>
 
-      <Stack gap={4} bg={"white"} p={4} borderRadius="md" boxShadow="sm">
+      <Stack gap={4} bg="white" p={4} borderRadius="md" boxShadow="sm">
         {visibleRepos.map((repo) => (
           <Box
             key={repo.id}
@@ -51,9 +42,9 @@ const ReposSection = () => {
             borderWidth="1px"
             borderRadius="md"
             bg="gray.50"
-            minH={100}
-            maxH={150}
             _hover={{ bg: "yellow.100", cursor: "pointer" }}
+            maxH="150px"
+            overflowY="auto"
           >
             <Heading size="sm" mb={1}>
               <a
@@ -77,9 +68,15 @@ const ReposSection = () => {
         page={page}
         onPageChange={(e) => setPage(e.page)}
       >
-        <ButtonGroup mt={6} size="sm">
+        <ButtonGroup
+          mt={6}
+          size="sm"
+          flexWrap="wrap" // <-- Bu xətti əlavə et
+          justifyContent="center" // Daha simmetrik görünüş
+          gap={2} // düymələr arasında məsafə
+        >
           <Pagination.PrevTrigger asChild>
-            <IconButton aria-label="Əvvəlki">
+            <IconButton>
               <HiChevronLeft />
             </IconButton>
           </Pagination.PrevTrigger>
@@ -103,7 +100,7 @@ const ReposSection = () => {
           )}
 
           <Pagination.NextTrigger asChild>
-            <IconButton aria-label="Sonrakı">
+            <IconButton>
               <HiChevronRight />
             </IconButton>
           </Pagination.NextTrigger>

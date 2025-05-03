@@ -10,16 +10,14 @@ import {
   Badge,
   Flex,
   Icon,
-  Stack,
 } from "@chakra-ui/react";
-import { useUserRepos, useUserStore } from "../store/userStore";
+import { useUserStore } from "../store/userStore";
 import { useNavigate } from "react-router-dom";
-import { MdBookmark, } from "react-icons/md";
+import { MdBookmark } from "react-icons/md";
 import ReposSection from "@features/ReposSection";
-// import { SpinnerIcon } from "@chakra-ui/icons";
+
 const DetailPage = () => {
   const user = useUserStore((state) => state.user);
-  const { data: repos, isLoading, isError } = useUserRepos(user?.login);
   const navigate = useNavigate();
 
   if (!user) {
@@ -34,24 +32,36 @@ const DetailPage = () => {
   }
 
   return (
-    <>
+    <Flex
+      direction={{ base: "column", lg: "row" }}
+      gap={8}
+      alignItems="center"
+      width="100%"
+      flexWrap="wrap"
+    >
       <Box
-        w={{ base: "90%", sm: "80%", md: "70%", lg: "60%" }}
-        mx="auto"
+        flex="1"
+        minW={{ base: "100%", md: "100%" }}
         p={6}
         borderWidth="1px"
         borderRadius="lg"
         boxShadow="md"
         bg="blue.100"
       >
-        <Flex align="center" gap={4} mb={6}>
+        <Flex
+          direction={{ base: "column", sm: "row" }}
+          align="center"
+          gap={4}
+          mb={6}
+        >
           <Image
             src={user?.avatar_url}
-            height={150}
-            width={150}
-            style={{ objectFit: "cover", borderRadius: "50%" }}
+            height="150px"
+            width="150px"
+            objectFit="cover"
+            borderRadius="full"
           />
-          <Box>
+          <Box textAlign={{ base: "center", sm: "left" }}>
             <Heading size="md">{user?.name}</Heading>
             <Text color="gray.500">@{user?.login}</Text>
           </Box>
@@ -63,7 +73,7 @@ const DetailPage = () => {
           </Text>
         )}
 
-        <SimpleGrid columns={[1, 2]} gap={4}>
+        <SimpleGrid columns={{ base: 1, md: 2 }} spacing={4}>
           <Box>
             <Text fontWeight="bold">Şirkət:</Text>
             <Text>{user?.company || "—"}</Text>
@@ -73,16 +83,13 @@ const DetailPage = () => {
             <Text>{user?.email || "—"}</Text>
           </Box>
           <Box>
-            <Text fontWeight="bold">Yer</Text>
+            <Text fontWeight="bold">Yer:</Text>
             <Text>{user?.location || "—"}</Text>
           </Box>
           <Box>
             <Text fontWeight="bold">GitHub linki:</Text>
-            <Link href={user?.html_url} color="blue.500">
-              {user?.html_url}{" "}
-              <Icon size="lg" color="tomato">
-                <MdBookmark color="blue" />
-              </Icon>
+            <Link href={user?.html_url} color="blue.500" isExternal>
+              {user?.html_url} <Icon as={MdBookmark} color="blue.400" ml={1} />
             </Link>
           </Box>
           <Box>
@@ -102,18 +109,25 @@ const DetailPage = () => {
             <Text>{new Date(user?.created_at).toLocaleDateString()}</Text>
           </Box>
         </SimpleGrid>
-        <Button
-          mt={6}
-          w="full"
-          colorScheme="blue"
-          width={200}
-          onClick={() => navigate("/")}
-        >
+
+        <Button mt={6} colorScheme="blue" onClick={() => navigate("/")}>
           Axtarışa geri dön
         </Button>
       </Box>
-    <ReposSection />
-    </>
+
+      <Box
+        w={["100%", "100%", "100%"]} // mobil üçün 100%, böyük ekran üçün 50%
+        mx="auto"
+        p={6}
+        borderWidth="1px"
+        borderRadius="lg"
+        boxShadow="md"
+        bg="blue.100"
+        height={["auto", "auto", 700]}
+      >
+        <ReposSection />
+      </Box>
+    </Flex>
   );
 };
 

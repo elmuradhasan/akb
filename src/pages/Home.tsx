@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+
 import UserSearchForm from "@features/UserSearch";
 import React from "react";
 
