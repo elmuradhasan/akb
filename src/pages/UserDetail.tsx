@@ -62,8 +62,10 @@ const DetailPage = () => {
             borderRadius="full"
           />
           <Box textAlign={{ base: "center", sm: "left" }}>
-            <Heading size="md">{user?.name}</Heading>
-            <Text color="gray.500">@{user?.login}</Text>
+            <Heading fontSize={["2xl", "3xl", "4xl", "5xl"]}>
+              {user?.name}
+            </Heading>
+            <Text color="gray.500" margin="10px 0">@{user?.login}</Text>
           </Box>
         </Flex>
 

@@ -71,9 +71,9 @@ const ReposSection = () => {
         <ButtonGroup
           mt={6}
           size="sm"
-          flexWrap="wrap" // <-- Bu xətti əlavə et
-          justifyContent="center" // Daha simmetrik görünüş
-          gap={2} // düymələr arasında məsafə
+          flexWrap="wrap" 
+          justifyContent="center" 
+          gap={2} 
         >
           <Pagination.PrevTrigger asChild>
             <IconButton>

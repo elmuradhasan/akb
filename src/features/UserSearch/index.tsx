@@ -7,10 +7,8 @@ import {
   Stack,
   Field,
   InputGroup,
-  HStack,
   Heading,
   Box,
-  Flex,
 } from "@chakra-ui/react";
 import { LuUser } from "react-icons/lu";
 import { useMutation } from "@tanstack/react-query";
@@ -95,7 +93,7 @@ const UserSearchForm = () => {
             type="submit"
             colorScheme="blue"
             w="full"
-            isLoading={isPending}
+            loading={isPending}
           >
             Axtar
           </Button>
