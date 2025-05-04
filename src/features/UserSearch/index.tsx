@@ -41,7 +41,9 @@ const UserSearchForm = () => {
     },
   });
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: {username:string}) => {
+    console.log(data,"Salam");
+    
     mutate(data.username);
   };
 

@@ -13,9 +13,10 @@ import {
 import { useUserStore } from "../../store/userStore";
 import { MdBookmark } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
+import { User } from "../../types/gitTypes";
 
 function UserFullInfo() {
-  const user = useUserStore((state) => state.user);
+  const user: User | null= useUserStore((state) => state.user) ;
   const navigate = useNavigate();
 
   return (

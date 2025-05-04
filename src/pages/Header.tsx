@@ -21,7 +21,7 @@ const Header = () => {
           color="gray.800"
           _dark={{ color: 'whiteAlpha.900' }}
         >
-          elmuradhasan
+          elmuradhasandev
         </Heading>
         <ColorModeButton />
       </Flex>
