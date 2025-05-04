@@ -16,7 +16,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "./src", // ⬅️ Əsas düzəlişlərdən biri
+    "baseUrl": "./src", 
     "paths": {
       "@components/*": ["components/*"],
       "@pages/*": ["pages/*"],

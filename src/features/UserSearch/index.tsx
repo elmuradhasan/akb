@@ -17,15 +17,12 @@ import { useUserStore } from "../../store/userStore";
 import { schema } from "../../schema/userValidationSchema";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
-
-
 const UserSearchForm = () => {
   const setUser = useUserStore((state) => state.setUser);
   const navigate = useNavigate();
   const {
     control,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -37,10 +34,11 @@ const UserSearchForm = () => {
       navigate("/detail");
     },
     onError: (error) => {
-      toast.error("İstifadəçi tapılmadı. Zəhmət olmasa düzgün username daxil edin.");
+      toast.error(
+        "İstifadəçi tapılmadı. Zəhmət olmasa düzgün username daxil edin."
+      );
       console.error("User not found:", error);
-    }
-    
+    },
   });
 
   const onSubmit = (data: any) => {
@@ -49,16 +47,15 @@ const UserSearchForm = () => {
 
   return (
     <Box
-      width={{ base: "100%", sm: "80%", md: "60%", lg: "50%" }}
+      width={{ base: "100%", sm: "80%", md: "60%", lg: "40%" }}
       padding={{ base: 6, md: 10 }}
       borderRadius="md"
       boxShadow="lg"
-      bg="blue.100"
+      bg="green.200"
       display="flex"
       flexDirection="column"
       alignItems="center"
       justifyContent="center"
-      mt={10}
     >
       <Heading
         color="teal.600"
@@ -68,15 +65,15 @@ const UserSearchForm = () => {
       >
         Github istifadəçisi axtarışı
       </Heading>
-      <form onSubmit={handleSubmit(onSubmit)} style={{width:"300px"}} >
-        <Stack gap={4} >
+      <form onSubmit={handleSubmit(onSubmit)} style={{ width: "320px" }}>
+        <Stack gap={4}>
           <Controller
             name="username"
             control={control}
             defaultValue=""
             render={({ field }) => (
               <Field.Root invalid={!!errors.username}>
-                <Field.Label>İstifadəçi adı:</Field.Label>
+                <Field.Label color="teal.600">İstifadəçi adı:</Field.Label>
                 <InputGroup startElement={<LuUser />}>
                   <Input
                     {...field}
@@ -85,18 +82,11 @@ const UserSearchForm = () => {
                     margin="10px 0"
                   />
                 </InputGroup>
-                <Field.ErrorText>
-                  {errors.username?.message}
-                </Field.ErrorText>
+                <Field.ErrorText>{errors.username?.message}</Field.ErrorText>
               </Field.Root>
             )}
           />
-          <Button
-            type="submit"
-            colorScheme="blue"
-            w="full"
-            loading={isPending}
-          >
+          <Button type="submit"  w="full" loading={isPending}>
             Axtar
           </Button>
         </Stack>

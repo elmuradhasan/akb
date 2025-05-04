@@ -1,17 +1,17 @@
 import {
   Box,
   Heading,
-  Stack,
   Text,
   Badge,
   ButtonGroup,
   IconButton,
   SimpleGrid,
 } from "@chakra-ui/react";
-import { useUserRepos, useUserStore } from "../store/userStore";
+import { useUserRepos, useUserStore } from "../../store/userStore";
 import { useState } from "react";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 import { Pagination } from "@ark-ui/react";
+import LoaderPage from "@components/LoaderPage";
 
 const pageSize = 3;
 
@@ -20,7 +20,7 @@ const ReposSection = () => {
   const { data: repos, isLoading, isError } = useUserRepos(user?.login);
   const [page, setPage] = useState(1);
 
-  if (isLoading) return <Text>Repolar yüklənir...</Text>;
+  if (isLoading) return  <LoaderPage message="Repolar yüklənir..." />;
   if (isError) return <Text textAlign="center">Repolar yüklənə bilmədi.</Text>;
   if (!repos || repos.length === 0)
     return <Text>İstifadəçinin public reposu yoxdur.</Text>;
@@ -49,23 +49,24 @@ const ReposSection = () => {
             p={4}
             borderWidth="1px"
             borderRadius="md"
-            bg="gray.50"
-            _hover={{ bg: "yellow.100", cursor: "pointer" }}
+            bg="gray.500"
+            _hover={{ bg: "yellow.500", cursor: "pointer" }}
             maxH="150px"
             overflowY="auto"
           >
-            <Heading size="sm" mb={1}>
+            <Heading size="lg" mb={1}>
               <a
                 href={repo.html_url}
+               
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ textDecoration: "underline", color: "blue" }}
+                style={{ color: "CaptionText" }}
               >
                 {repo.name}
               </a>
             </Heading>
-            <Text mb={2}>{repo.description || "Açıqlama yoxdur"}</Text>
-            <Badge bg="red.100" colorScheme="yellow">★ {repo.stargazers_count}</Badge>
+            <Text mb={2} color="white">{repo.description || "Açıqlama yoxdur"}</Text>
+            <Badge bg="red.400" colorScheme="yellow">★ {repo.stargazers_count}</Badge>
           </Box>
         ))}
       </SimpleGrid>
