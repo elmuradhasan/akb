@@ -2,12 +2,7 @@ import { create } from "zustand";
 import { useQuery } from "@tanstack/react-query";
 import { getUserRepos } from "@services/userService";
 import { persist } from 'zustand/middleware';
-interface User {
-  id: string;
-  username: string;
-  // digər sahələr
-}
-
+import { User } from "../types/gitTypes";
 interface UserState {
   user: User | null;
   setUser: (user: User) => void;
