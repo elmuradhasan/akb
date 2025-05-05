@@ -1,4 +1,4 @@
-
+import {  lazy } from "react";
 import { Box } from '@chakra-ui/react';
 import Header from '@pages/Header';
 import { Toaster } from 'react-hot-toast';
