@@ -1,11 +1,10 @@
 
 import { Box } from '@chakra-ui/react';
 import Header from '@pages/Header';
-import Home from '@pages/Home';
-import UserDetail from '@pages/UserDetail';
 import { Toaster } from 'react-hot-toast';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-
+const Home = lazy(() => import('@pages/Home'));
+const UserDetail = lazy(() => import('@pages/UserDetail'));
 const App = () => 
    (
     <Router>
